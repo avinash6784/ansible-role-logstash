@@ -6,6 +6,7 @@ Note that this role installs a syslog grok pattern by default; if you want to ad
 ## Requirements
 
 Requires Java (Preferred Java 8+). See [`avinash6784.oracle-java`](https://github.com/avinash6784/ansible-oracle-java) role to install Java 8.
+
 This role is made Elastisearch as a backend for storing the logs. See [`avinash6784.elasticsearch`](https://github.com/avinash6784/ansible-role-elasticsearch) role to install Elasticsearch
 
 ## Role Variables
@@ -30,7 +31,8 @@ logstash_ssl_key_file: logstash-forwarder-example.key
 To generate a self-signed certificate/key pair, you can use following role to generate ssl certs.
 See [`avinash6784.openssl-certs`](https://github.com/avinash6784/ansible-role-openssl-certs) role to install and generate OpenSSL certs
 
-**NOTE**: filebeat and logstash may not work correctly with self-signed certificates unless you also have the full chain of trust (including the Certificate Authority for your self-signed certs) added on your server. See: https://github.com/elastic/logstash/issues/4926#issuecomment-203936891
+**NOTE**: filebeat and logstash may not work correctly with self-signed certificates unless you also have the full chain of trust (including the Certificate Authority for your self-signed certs) added on your server. 
+See: https://github.com/elastic/logstash/issues/4926#issuecomment-203936891
 
 # Configuration for local syslog file
 logstash_local_syslog_path: /var/log/syslog
