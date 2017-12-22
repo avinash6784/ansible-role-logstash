@@ -1,0 +1,16 @@
+---
+
+# Logstash defaults vars
+logstash_major_version: 5.x
+logstash_port: 5044
+logstash_elasticsearch_host:
+  - http://localhost:9200
+
+# ssl related vars
+logstash_ssl_dir: /etc/pki/logstash
+logstash_ssl_certificate_file: ''
+logstash_ssl_key_file: ''
+
+# syslog config vars
+logstash_local_syslog_path: /var/log/syslog
+logstash_monitor_local_syslog: true

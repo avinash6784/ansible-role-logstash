@@ -1,0 +1,48 @@
+---
+
+# This task is optional no need to create logstash.yml
+- name: Configure Logstash.
+  template:
+    src: logstash.yml.j2
+    dest: /etc/logstash/logstash.yml
+    owner: root
+    group: logstash
+    mode: 0750
+  notify: restart logstash
+  
+- name: Create Logstash configuration files.
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/logstash/conf.d/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - 01-beats-input.conf
+    - 30-elasticsearch-output.conf
+  notify: restart logstash
+
+- name: Create Logstash filters (syslog/apache/nginx).
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/logstash/conf.d/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - 10-syslog-filters.conf    
+    - 11-apache-filters.conf
+    - 12-nginx-filters.conf
+  notify: restart logstash
+
+- name: Create Logstash configuration file for local syslog.
+  template:
+    src: 02-local-syslog-input.conf.j2
+    dest: /etc/logstash/conf.d/02-local-syslog-input.conf
+    owner: root
+    group: root
+    mode: 0644
+  when: logstash_monitor_local_syslog
+  notify: restart logstash
+  
+ 

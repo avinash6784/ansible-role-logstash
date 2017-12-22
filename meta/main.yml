@@ -1,0 +1,18 @@
+---
+dependencies:
+  - { role: avinash6784.oracle-java }
+
+galaxy_info:
+  author: avinash6784 (Avinash Pawar)
+  description: Ansible role to install Logstash
+  license: MIT
+  company: "DevOps Techie"
+  min_ansible_version: 2.0
+  platforms:
+  - name: EL
+    versions:
+    - all
+  galaxy_tags:
+    - development
+    - system
+    - monitoring

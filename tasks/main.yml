@@ -1,0 +1,36 @@
+---
+- name: Add Logstash GPG key.
+  rpm_key:
+    key: https://packages.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Add Logstash yum repository.
+  template:
+    src: logstash.repo.j2
+    dest: /etc/yum.repos.d/logstash.repo
+    mode: 0644
+
+- name: Install Logstash.
+  yum: 
+    name: logstash
+    state: installed
+
+# Logstash configuration
+- include: config.yml
+
+# Logstash ssl certificates configuration
+- include: ssl.yml
+  
+- name: Allow traffic through logstash TCP port in your firewall
+  firewalld:
+    port: "{{ logstash_port }}/tcp"
+    permanent: true
+    state: enabled
+
+- name: Start Logstash.
+  service: 
+    name: logstash 
+    state: restarted
+    enabled: yes
+  ignore_errors: true
+    

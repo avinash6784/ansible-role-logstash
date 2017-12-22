@@ -1,0 +1,8 @@
+---
+# dependency Java 8 role.
+ - src: https://github.com/avinash6784/ansible-oracle-java.git
+   name: ansible-oracle-java
+   
+# dependency Elasticsearch role.
+ - src: https://github.com/avinash6784/ansible-role-elasticsearch.git
+   name: ansible-role-elasticsearch
